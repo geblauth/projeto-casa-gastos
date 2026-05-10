@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+
+# database
+*.sqlite
+*.sqlite3
+
+# docker
+docker-data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# build
+dist/
+build/
+
+# Vite
+.vite/
+
+# editor
+.vscode/
+
+# coverage
+coverage/
