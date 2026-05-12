@@ -12,7 +12,7 @@ function Adicionar() {
 
     async function adicionarGasto() {
         try {
-            await axios.post("http://localhost:3000/gastos",
+            await axios.post("http://backend:3000/gastos",
                 {
                     descricao,
                     valor,
