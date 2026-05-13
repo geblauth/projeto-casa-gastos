@@ -12,7 +12,7 @@ function Adicionar() {
 
     async function adicionarGasto() {
         try {
-            await axios.post("http://backend:3000/gastos",
+            await axios.post("/api/gastos",
                 {
                     descricao,
                     valor,
@@ -67,6 +67,16 @@ function Adicionar() {
                     value={pessoa}
                     onChange={(e) =>
                         setPessoa(e.target.value)
+                    }
+                />
+            </div>
+
+             <div>
+                <input
+                    placeholder="Categoria"
+                    value={categoria}
+                    onChange={(e) =>
+                        setCategoria(e.target.value)
                     }
                 />
             </div>

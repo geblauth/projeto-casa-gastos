@@ -13,7 +13,9 @@ db.exec(`
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         descricao TEXT,
         valor REAL,
-        pessoa TEXT)
+        categoria TEXT,
+        pessoa TEXT,
+        data DATE)
 `)
 
 app.get("/gastos", (req, res) => {
@@ -22,13 +24,20 @@ app.get("/gastos", (req, res) => {
 })
 
 app.post("/gastos", (req, res) => {
-    const { descricao, valor, pessoa } = req.body
+    const { descricao, valor, categoria, pessoa, data } = req.body
 
     const stmt = db.prepare(`
-                "INSERT INTO gastos (descricao, valor, pessoa) VALUES (?, ?, ?)",
-                `)
+        INSERT INTO gastos (
+            descricao,
+            valor,
+            categoria,
+            pessoa,
+            data
+        )
+        VALUES (?, ?, ?, ?, ?)
+    `)
 
-    const result = stmt.run(descricao, valor, pessoa)
+    const result = stmt.run(descricao, valor, categoria, pessoa, data)
 
     res.json({ id: result.lastInsertRowid })
 })
