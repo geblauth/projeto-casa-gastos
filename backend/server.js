@@ -23,6 +23,37 @@ app.get("/gastos", (req, res) => {
     res.json(rows)
 })
 
+app.get("/gastos/:id", (req, res) => {
+    const { id } = req.params
+
+    const gasto = db.prepare("SELECT * FROM gastos WHERE id = ?").get(id)
+
+    res.json(gasto)
+})
+
+app.put("/gastos/:id", (req, res) => {
+    const { id } = req.params
+
+    const { descricao, valor, categoria, pessoa, data } = req.body
+
+    const stmt = db.prepare(`
+        UPDATE gastos
+        SET descricao = ?,
+         valor = ?,
+         categoria = ?,
+         pessoa = ?,
+         data = ?
+        WHERE id = ?`
+    )
+
+    stmt.run(descricao, valor, categoria, pessoa, data, id)
+
+    res.json(
+        { success: true }
+    )
+
+})
+
 app.post("/gastos", (req, res) => {
     const { descricao, valor, categoria, pessoa, data } = req.body
 

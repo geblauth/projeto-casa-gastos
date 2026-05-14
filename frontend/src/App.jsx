@@ -11,6 +11,7 @@ function App(){
       <Route path="/" element={<Home />}/>
       <Route path="/gastos" element={<Gastos />}/>
       <Route path="/adicionar" element={<Adicionar />}/>
+      <Route path = "/editar/:id" element={<Adicionar />}/>
     </Routes>
   </BrowserRouter>
   )

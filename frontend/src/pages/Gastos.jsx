@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 function Gastos() {
 
   const [gastos, setGastos] = useState([])
+  const navigate = useNavigate()
 
   async function carregarGastos() {
 
@@ -33,6 +35,7 @@ function Gastos() {
             <th>Categoria</th>
             <th>Pessoa</th>
             <th>Data</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +54,10 @@ function Gastos() {
               <td>
                 {gasto.data}
               </td>
+              <td>
+                <button onClick={() => navigate(`/editar/${gasto.id}`) }>Editar</button>
+              </td>
+
             </tr>
           ))}
         </tbody>
