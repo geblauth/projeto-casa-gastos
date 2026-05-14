@@ -60,13 +60,13 @@ function Gastos() {
 
   const gastosFiltrados = gastos.filter(
     (gasto) => {
-      const pessoaOk = !filtroPessoa || gasto.pessoa === filtroPessoa
+      const pessoaOk = filtroPessoa === "" || gasto.pessoa === filtroPessoa
 
-      const categoriaOk = !filtroCategoria || gasto.categoria === filtroCategoria
+      const categoriaOk = filtroCategoria === "" || gasto.categoria === filtroCategoria
 
-      const mesOk = !filtroMes || gasto.data.startsWith(filtroMes)
+      const mesOk = filtroMes === "" || gasto.data.startsWith(filtroMes)
 
-      return (pessoaOk, categoriaOk, mesOk)
+      return (pessoaOk && categoriaOk && mesOk)
     }
   )
 
