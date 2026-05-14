@@ -18,6 +18,17 @@ db.exec(`
         data DATE)
 `)
 
+db.exec(`CREATE TABLE IF NOT EXISTS categorias(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT)`)
+
+
+
+app.get("/categorias", (req, res) =>{
+    const categorias = db.prepare("SELECT * FROM categorias").all()
+    res.json(categorias)
+})        
+
 app.get("/gastos", (req, res) => {
     const rows = db.prepare("SELECT * FROM gastos").all()
     res.json(rows)
@@ -60,6 +71,16 @@ app.put("/gastos/:id", (req, res) => {
         { success: true }
     )
 
+})
+
+app.post("/categorias", (req, res) => {
+    const {nome} = req.body
+
+    const stmt = db.prepare(`INSET INTO categorias(nome) VALUES (?)`)
+
+    const result = stmt.run(nome)
+
+    res.json({id: result.lastInsertRowid})
 })
 
 app.post("/gastos", (req, res) => {
