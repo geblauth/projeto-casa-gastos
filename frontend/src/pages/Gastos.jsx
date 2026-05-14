@@ -18,7 +18,7 @@ function Gastos() {
   }
 
 
-  async function deletarGastos(){
+  async function deletarGastos(id){
 
     const confirmar = confirm(
       "Deseja apagar esse gasto?"

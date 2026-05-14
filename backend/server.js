@@ -76,7 +76,7 @@ app.put("/gastos/:id", (req, res) => {
 app.post("/categorias", (req, res) => {
     const {nome} = req.body
 
-    const stmt = db.prepare(`INSET INTO categorias(nome) VALUES (?)`)
+    const stmt = db.prepare(`INSERT INTO categorias(nome) VALUES (?)`)
 
     const result = stmt.run(nome)
 
