@@ -31,6 +31,14 @@ app.get("/gastos/:id", (req, res) => {
     res.json(gasto)
 })
 
+app.delete("/gastos/:id", (req, res) =>{
+    const {id} = req.params
+    const stmt = db.prepare("DELETE FROM gastos WHERE id = ? ")
+    stmt.run(id)
+
+    res.json({success: true})
+})
+
 app.put("/gastos/:id", (req, res) => {
     const { id } = req.params
 

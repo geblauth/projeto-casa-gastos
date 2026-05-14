@@ -17,6 +17,25 @@ function Gastos() {
     }
   }
 
+
+  async function deletarGastos(){
+
+    const confirmar = confirm(
+      "Deseja apagar esse gasto?"
+    )
+
+    if(!confirmar) return
+
+    try {
+        await axios.delete(`/api/gastos/${id}`)
+        carregarGastos()
+    } catch (err) {
+      console.error(err)
+      alert("Erro ao deletar gasto!")
+      
+    }
+  }
+
   useEffect(() => {
 
     carregarGastos()
@@ -56,8 +75,8 @@ function Gastos() {
               </td>
               <td>
                 <button onClick={() => navigate(`/editar/${gasto.id}`) }>Editar</button>
+                <button onClick={() => deletarGastos(gasto.id)}>Apagar</button>
               </td>
-
             </tr>
           ))}
         </tbody>
