@@ -40,13 +40,13 @@ function Gastos() {
     }
   }
 
-  async function carregarCategorias(){
+  async function carregarCategorias() {
     try {
       const response = await axios.get("/api/categorias")
       setCategorias(response.data)
     } catch (error) {
       console.error(error)
-      
+
     }
   }
 
@@ -70,6 +70,20 @@ function Gastos() {
     }
   )
 
+  const totalGermano = gastosFiltrados.filter(
+    (gasto) => gasto.pessoa === "Germano"
+  )
+    .reduce((total, gasto) => total + Number(gasto.valor), 0)
+
+
+  const totalVittoria = gastosFiltrados.filter(
+    (gasto) => gasto.pessoa === "Vittoria"
+  )
+    .reduce((total, gasto) => total + Number(gasto.valor), 0)
+
+
+  const totalGeral = gastosFiltrados.reduce((total, gasto) => total + Number(gasto.valor), 0)
+
   return (
 
     <div
@@ -79,12 +93,10 @@ function Gastos() {
         marginBottom: 20
 
       }}
+    >      <select
+      value={filtroPessoa}
+      onChange={(e) => setFiltroPessoa(e.target.value)}
     >
-
-      <select
-        value={filtroPessoa}
-        onChange={(e) => setFiltroPessoa(e.target.value)}
-      >
 
         <option value="">Todas pessoas</option>
         <option value="Germano">Germano</option>
@@ -107,6 +119,9 @@ function Gastos() {
         }
       />
 
+      <h2>Total Geral: R$ {totalGeral.toFixed(2)}</h2>
+      <h3>Germano: RS{totalGeral.toFixed(2)}</h3>
+      <h4>Vittoria: R${totalGeral.toFixed(2)}</h4>
       <h1>Lista de gastos</h1>
       <table border="1" cellPadding="10">
         <thead>
